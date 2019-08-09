@@ -1,0 +1,23 @@
+{
+  "name": "hackerrank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmendesas/hackerrank.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmendesas/hackerrank/issues"
+  },
+  "homepage": "https://github.com/mmendesas/hackerrank#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
