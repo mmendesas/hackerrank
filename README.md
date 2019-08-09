@@ -2,6 +2,8 @@
 
 A list of some algorithms solutions from `hackerrank` using `nodejs`
 
+![](hackerrank-rec.gif)
+
 ## Running the tests
 1. At the terminal:
     - run `yarn test` to run all tests
