@@ -1,49 +1,47 @@
 // 04 - median two sorted arrays
 // https://leetcode.com/problems/median-of-two-sorted-arrays/
 
-const findMedianSortedArrays = (nums1, nums2) => {
+const merge = (nums1, nums2) => {
+  let last = nums1.length + nums2.length - 1
+  const arr = Array(nums1.length + nums2.length).fill()
   let m = nums1.length
   let n = nums2.length
 
-  let size = m + n
-  let last = size - 1;
-  const middle = size <= 2 ? 0 : Math.floor(size / 2)
-  const arr = Array(size).fill(0)
-
-  // mount in reverse order
-  while (m > 0 && n > 0) {
-    if (last == middle - 1) break;
-
-    if (nums1[m - 1] > nums2[n - 1]) {
-      arr[last] = nums1[m - 1]
-      m -= 1
-    } else {
-      arr[last] = nums2[n - 1]
-      n -= 1
-    }
-    last -= 1
+  while(m > 0 && n > 0){
+     if (nums1[m - 1] > nums2[n - 1]) {
+        arr[last] = nums1[m - 1]
+        m--;
+      } else {
+        arr[last] = nums2[n - 1]
+        n--;
+      }
+      last--;
   }
 
-  // get the rest of first arr
-  while (m > 0) {
-    arr[last] = nums1[m - 1]
-    m -= 1;
-    last -= 1;
-  }
-
-  // get the rest of second arr
+  // fill nums1 with leftover from nums2
   while (n > 0) {
-    arr[last] = nums2[n - 1]
-    n -= 1;
-    last -= 1;
+    arr[last] = nums2[n-1]
+    n--;
+    last--;
   }
 
-  console.log(size, middle, arr)
+  // fill nums2 with leftover from nums1
+  while (m > 0) {
+    arr[last] = nums1[m-1]
+    m--;
+    last--;
+  }
+  return arr
+}
 
-  const result = size % 2 != 0 ? arr[middle] : (arr[middle] + arr[middle - 1]) / 2;
+const findMedianSortedArrays = (nums1, nums2) => {
+  const size = nums1.length + nums2.length
+  const middle = Math.floor(size / 2)
+  const arr = merge(nums1, nums2)
+  const isEven = size % 2 == 0;
 
-  // console.log(result, arr, m, n)
-  return result?.toFixed(5)
+  const res = isEven ? (arr[middle-1] + arr[middle])/2 : arr[middle]
+  return res == 0 ? 0 : res.toFixed(5)
 }
 
 console.log(findMedianSortedArrays([1, 3], [2])) // 2.00000
