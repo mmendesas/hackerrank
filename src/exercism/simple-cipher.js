@@ -1,39 +1,60 @@
 
-class Cipher {
+// # Simple Cipher
+// encoding and decoding a message using a simple shift cipher, also known as a Caesar cipher.
+// for each letter, get the distance between the letter and the key, then use the distance to get the new letter
+
+export class Cipher {
   constructor(key = '') {
-    this.keyMap = key
     this.alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    this.cipherKey = key.toLowerCase() || this.random();
   }
 
-  encode(text) {
+  random() {
+    return Array.from({ length: 100 }, () => {
+      const random = Math.floor(Math.random() * this.alphabet.length)
+      return this.alphabet[random]
+    }).join('')
+  }
+
+  // getDistance('a', 'b') => 1
+  getDistance(a, b) {
+    if (a === undefined || b === undefined) return 3
+
+    const posA = this.alphabet.indexOf(a);
+    const posB = this.alphabet.indexOf(b);
+    return posB - posA;
+  }
+
+  // encode('aaaaaaaaaa') => 'abcdefghij'
+  encode(text = '') {
     let result = ''
 
-    for (let i = 0; i < text.length; i++) {
-      const charA = text[i]
-      const idxA = this.alphabet.indexOf(charA)
+    for (const [idx, letter] of text.split('').entries()) {
+      const indexA = this.alphabet.indexOf(letter);
+      const dist = this.getDistance('a', this.cipherKey[idx % this.key.length])
+      const indexB = Math.abs((indexA + dist)) % this.alphabet.length;
 
-      const charB = this.keyMap[i]
-      const idxB = this.alphabet.indexOf(charB)
-
-      const moveIdx = idxB - idxA;
-      console.log('asdf', charA, charB, idxB, moveIdx)
-      result += this.alphabet[moveIdx]
+      result += this.alphabet[indexB];
     }
 
-    return result;
+    return result
   }
 
-  decode() { }
+  // decode('abcdefghij') => 'aaaaaaaaaa'
+  decode(text = '') {
+    let result = ''
+
+    for (let [idx, letter] of text.split('').entries()) {
+      const indexA = this.alphabet.indexOf(letter);
+      const dist = this.getDistance('a', this.cipherKey[idx % this.key.length])
+      const indexB = Math.abs((indexA - dist+ this.alphabet.length)) % this.alphabet.length;
+      result += this.alphabet[indexB];
+    }
+
+    return result
+  }
 
   get key() {
-    return this.keyMap
+    return this.cipherKey
   }
 }
-
-const key = 'iamapandabear';
-const cipher = new Cipher(key)
-
-const result = cipher.encode('iamapandabear')
-
-console.log(cipher.key)
-console.log("result:", result)
