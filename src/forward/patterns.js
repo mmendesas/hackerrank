@@ -286,6 +286,120 @@ const pattern18 = (n = 5) => {
   }
 };
 
+// * * * * * * * * * *
+// * * * *     * * * *
+// * * *         * * *
+// * *             * *
+// *                 *
+// *                 *
+// * *             * *
+// * * *         * * *
+// * * * *     * * * *
+// * * * * * * * * * *
+
+const pattern19 = (n = 5) => {
+  const max = 2 * n;
+
+  for (let i = 0; i < n; i++) {
+    // stars
+    for (let j = 0; j < n - i; j++) {
+      process.stdout.write(" *");
+    }
+
+    // spaces
+    for (let j = 0; j < i; j++) {
+      process.stdout.write("  ");
+    }
+
+    for (let j = 0; j < i; j++) {
+      process.stdout.write("  ");
+    }
+
+    // stars
+    for (let j = 0; j < n - i; j++) {
+      process.stdout.write(" *");
+    }
+    process.stdout.write("\n");
+  }
+
+  for (let i = 0; i < n; i++) {
+    // stars
+    for (let j = 0; j < i; j++) {
+      process.stdout.write(" *");
+    }
+
+    // spaces
+    for (let j = 0; j < n - i; j++) {
+      process.stdout.write("  ");
+    }
+    for (let j = 0; j < n - i; j++) {
+      process.stdout.write("  ");
+    }
+
+    // stars
+    for (let j = 0; j < i; j++) {
+      process.stdout.write(" *");
+    }
+    process.stdout.write("\n");
+  }
+};
+
+// *                 *
+// * *             * *
+// * * *         * * *
+// * * * *     * * * *
+// * * * * * * * * * *
+// * * * * * * * * * *
+// * * * *     * * * *
+// * * *         * * *
+// * *             * *
+// *                 *
+const pattern20 = (n = 5) => {
+  for (let i = 0; i < n; i++) {
+    // stars
+    for (let j = 0; j <= i; j++) {
+      process.stdout.write(" *");
+    }
+
+    // spaces
+    for (let j = 0; j < n - i - 1; j++) {
+      process.stdout.write("  ");
+    }
+    for (let j = 0; j < n - i - 1; j++) {
+      process.stdout.write("  ");
+    }
+
+    // stars
+    for (let j = 0; j <= i; j++) {
+      process.stdout.write(" *");
+    }
+
+    process.stdout.write("\n");
+  }
+
+  for (let i = 0; i < n; i++) {
+    // stars
+    for (let j = 0; j <= n - i - 1; j++) {
+      process.stdout.write(" *");
+    }
+
+    // spaces
+    for (let j = 0; j < i; j++) {
+      process.stdout.write("  ");
+    }
+    for (let j = 0; j < i; j++) {
+      process.stdout.write("  ");
+    }
+
+    // stars
+    for (let j = 0; j <= n - i - 1; j++) {
+      process.stdout.write(" *");
+    }
+
+    process.stdout.write("\n");
+  }
+};
+
 // RESULTS
 
 const printAll = () => {
@@ -324,6 +438,6 @@ const printAll = () => {
 };
 
 // unique test
-pattern18();
+pattern20();
 
 // printAll()
