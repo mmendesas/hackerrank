@@ -233,6 +233,59 @@ const pattern16 = (n = 5) => {
   }
 };
 
+// ---A---
+// --ABA--
+// -ABCBA-
+// ABCDCBA
+const pattern17 = (n = 5) => {
+  // Using for loop for (A-Z):
+  let alphabet = "";
+  for (i = 65; i <= 90; i++) {
+    alphabet += String.fromCharCode(i);
+  }
+
+  for (let i = 0; i < n; i++) {
+    // spaces
+    for (let j = 0; j < n - i - 1; j++) {
+      process.stdout.write(" ");
+    }
+
+    // chars
+    let alphaIndex = 0;
+    const max = 2 * i + 1;
+    const breakpoint = Math.abs(max / 2);
+
+    for (let j = 1; j <= max; j++) {
+      process.stdout.write(alphabet[alphaIndex]);
+      if (j <= breakpoint) alphaIndex += 1;
+      else alphaIndex -= 1;
+    }
+
+    // spaces
+    for (let j = 0; j < n - i - 1; j++) {
+      process.stdout.write(" ");
+    }
+    process.stdout.write("\n");
+  }
+};
+
+// E
+// D E
+// C D E
+// B C D E
+// A B C D E
+const pattern18 = (n = 5) => {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let alphaIndex = n - 1;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = i; j >= 0; j--) {
+      process.stdout.write(" " + alphabet[alphaIndex - j]);
+    }
+    process.stdout.write("\n");
+  }
+};
+
 // RESULTS
 
 const printAll = () => {
@@ -253,6 +306,8 @@ const printAll = () => {
     pattern14: pattern14,
     pattern15: pattern15,
     pattern16: pattern16,
+    pattern17: pattern17,
+    pattern18: pattern18,
   };
 
   Array.from({
@@ -269,6 +324,6 @@ const printAll = () => {
 };
 
 // unique test
-// pattern16();
+pattern18();
 
-printAll();
+// printAll()
