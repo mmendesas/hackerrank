@@ -457,6 +457,10 @@ const printAll = () => {
     pattern16: pattern16,
     pattern17: pattern17,
     pattern18: pattern18,
+    pattern19: pattern19,
+    pattern20: pattern20,
+    pattern21: pattern21,
+    pattern22: pattern22,
   };
 
   Array.from({
@@ -473,6 +477,6 @@ const printAll = () => {
 };
 
 // unique test
-pattern22();
+// pattern22();
 
-// printAll()
+printAll();
