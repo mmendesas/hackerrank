@@ -400,6 +400,41 @@ const pattern20 = (n = 5) => {
   }
 };
 
+// * * * *
+// *     *
+// *     *
+// * * * *
+const pattern21 = (n = 4) => {
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (i === 0 || i === n - 1 || j === 0 || j === n - 1) {
+        process.stdout.write(" *");
+      } else {
+        process.stdout.write("  ");
+      }
+    }
+    process.stdout.write("\n");
+  }
+};
+
+const pattern22 = (n = 9) => {
+  let max = 2 * n - 1;
+
+  for (let i = 0; i < max; i++) {
+    for (let j = 0; j < max; j++) {
+      // get distance from each side
+      let top = i;
+      let left = j;
+      let right = 2 * n - 2 - j;
+      let bottom = 2 * n - 2 - i;
+
+      const min = Math.min(top, left, right, bottom);
+      process.stdout.write(" " + String(n - min));
+    }
+    process.stdout.write("\n");
+  }
+};
+
 // RESULTS
 
 const printAll = () => {
@@ -438,6 +473,6 @@ const printAll = () => {
 };
 
 // unique test
-pattern20();
+pattern22();
 
 // printAll()
