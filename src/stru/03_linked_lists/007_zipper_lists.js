@@ -5,37 +5,44 @@ class Node {
   }
 }
 
-//
-const zipperLists = (head1, head2) => {
-  let idx = 0;
-  const node = new Node()
-  let current = node;
+// iterative approach
+const zipperLists1 = (head1, head2) => {
+  const head = head1;
+  let tail = head;
+  let current1 = head1.next;
+  let current2 = head2;
+  let count = 0;
 
-  while (true) {
-    if (head1 === null) {
-      current.next = head2;
-      break;
+  while (current1 !== null && current2 !== null) {
+    if (count % 2 === 0) {
+      tail.next = current2;
+      current2 = current2.next;
+    } else {
+      tail.next = current1;
+      current1 = current1.next;
     }
-    if (head2 === null) {
-      current.next = head1;
-      break
-    }
-
-    if (idx % 2 === 0) {
-      current.next = head1;
-      head1 = head1.next;
-    }
-    else {
-      current.next = head2;
-      head2 = head2.next;
-    }
-
-    idx++;
-    current = current.next;
+    tail = tail.next;
+    count += 1;
   }
 
-  return node.next
-}
+  if (current1 !== null) tail.next = current1;
+  if (current2 !== null) tail.next = current2;
+
+  return head;
+};
+
+// recursive
+const zipperLists = (head1, head2) => {
+  if (head1 === null && head2 === null) return null;
+  if (head1 === null) return head2;
+  if (head2 === null) return head1;
+  const next1 = head1.next;
+  const next2 = head2.next;
+
+  head1.next = head2;
+  head2.next = zipperLists(next1, next2);
+  return head1;
+};
 
 // testing vars
 const s = new Node("s");
@@ -51,9 +58,9 @@ two.next = three;
 three.next = four;
 
 const printList = (head = null) => {
-  if (head === null) return '';
-  return head.val + ' -> ' + printList(head.next)
-}
+  if (head === null) return "";
+  return head.val + " -> " + printList(head.next);
+};
 
 console.log(printList(zipperLists(s, one)));
 // s -> 1 -> t -> 2 -> 3 -> 4
