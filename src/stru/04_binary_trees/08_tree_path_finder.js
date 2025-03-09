@@ -46,7 +46,7 @@ const pathFinder = (root, target) => {
   return null;
 };
 
-// depth first - with push
+// depth first - recursive with push
 const pathFinderHelper = (root, target) => {
   if (!root) return null;
   if (root.val === target) return [root.val];
